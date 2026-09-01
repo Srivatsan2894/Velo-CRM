@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FormField, inputCls, Spinner } from './UI'
 
 export default function ContactForm({ initial, onSave, onClose }) {
-  const blank = { first_name: '', last_name: '', email: '', job_title: '', company_name: '', phone: '', city: '', state: '', country: 'US' }
+  const blank = { first_name: '', last_name: '', email: '', job_title: '', company_name: '', phone: '', city: '', state: '', country: 'US', contact_type: 'Standard' }
   const [form, setForm] = useState(initial ? {
     first_name: initial.first_name || '',
     last_name: initial.last_name || '',
@@ -13,6 +13,7 @@ export default function ContactForm({ initial, onSave, onClose }) {
     city: initial.city || '',
     state: initial.state || '',
     country: initial.country || 'US',
+    contact_type: initial.contact_type || 'Standard',
   } : blank)
   const [saving, setSaving] = useState(false)
 
@@ -36,7 +37,16 @@ export default function ContactForm({ initial, onSave, onClose }) {
         <FormField label="Job Title"><input className={inputCls} value={form.job_title} onChange={set('job_title')} placeholder="VP Sales" /></FormField>
         <FormField label="Company"><input className={inputCls} value={form.company_name} onChange={set('company_name')} placeholder="Acme Corp" /></FormField>
       </div>
-      <FormField label="Phone"><input className={inputCls} value={form.phone} onChange={set('phone')} placeholder="+1 555 000 0000" /></FormField>
+      <div className="grid grid-cols-2 gap-4">
+        <FormField label="Phone"><input className={inputCls} value={form.phone} onChange={set('phone')} placeholder="+1 555 000 0000" /></FormField>
+        <FormField label="Contact Type">
+          <select className={inputCls} value={form.contact_type} onChange={set('contact_type')}>
+            <option value="Standard">Standard</option>
+            <option value="Premium">Premium</option>
+            <option value="VIP">VIP</option>
+          </select>
+        </FormField>
+      </div>
       <div className="grid grid-cols-3 gap-4">
         <FormField label="City"><input className={inputCls} value={form.city} onChange={set('city')} placeholder="New York" /></FormField>
         <FormField label="State"><input className={inputCls} value={form.state} onChange={set('state')} placeholder="NY" /></FormField>
