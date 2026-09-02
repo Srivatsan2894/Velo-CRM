@@ -56,7 +56,7 @@ function EmptyState({ icon, text, action, onAction }) {
 const INPUT = { width:'100%', padding:'8px 10px', border:'1.5px solid #e2e8f0', borderRadius:7, fontSize:13, color:'#0f172a', outline:'none', boxSizing:'border-box', background:'#fff', fontFamily:'"IBM Plex Sans",sans-serif' }
 
 function AddContactModal({ company, onClose, onSaved }) {
-  const [f, setF] = useState({ first_name:'', last_name:'', email:'', job_title:'', phone:'', management_level:'', contact_type:'Standard' })
+  const [f, setF] = useState({ first_name:'', last_name:'', email:'', job_title:'', phone:'', management_level:'', contact_type:'Standard', brand:'Zephyr Retail' })
   const [saving, setSaving] = useState(false)
   const [err, setErr] = useState(null)
   const set = (k,v) => setF(p => ({ ...p, [k]:v }))
@@ -86,7 +86,7 @@ function AddContactModal({ company, onClose, onSaved }) {
           <div><label style={{ fontSize:11, fontWeight:600, color:'#64748b', display:'block', marginBottom:4 }}>Job Title</label><input style={INPUT} value={f.job_title} onChange={e=>set('job_title',e.target.value)} placeholder="VP of Sales" /></div>
           <div><label style={{ fontSize:11, fontWeight:600, color:'#64748b', display:'block', marginBottom:4 }}>Phone</label><input style={INPUT} value={f.phone} onChange={e=>set('phone',e.target.value)} placeholder="+1 (555) 000-0000" /></div>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:16 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:10 }}>
           <div><label style={{ fontSize:11, fontWeight:600, color:'#64748b', display:'block', marginBottom:4 }}>Seniority</label>
             <select style={INPUT} value={f.management_level} onChange={e=>set('management_level',e.target.value)}>
               <option value="">— Select —</option>
@@ -98,6 +98,12 @@ function AddContactModal({ company, onClose, onSaved }) {
               {['Standard','Premium','VIP'].map(t=><option key={t} value={t}>{t}</option>)}
             </select>
           </div>
+        </div>
+        <div style={{ marginBottom:16 }}>
+          <label style={{ fontSize:11, fontWeight:600, color:'#64748b', display:'block', marginBottom:4 }}>Brand</label>
+          <select style={INPUT} value={f.brand} onChange={e=>set('brand',e.target.value)}>
+            {['Zephyr Retail','Zephyr Luxe'].map(b=><option key={b} value={b}>{b}</option>)}
+          </select>
         </div>
         {err && <div style={{ padding:'8px 12px', background:'#fef2f2', border:'1px solid #fecaca', borderRadius:7, color:'#dc2626', fontSize:12, marginBottom:12 }}>⚠️ {err}</div>}
         <div style={{ display:'flex', gap:8, justifyContent:'flex-end' }}>
