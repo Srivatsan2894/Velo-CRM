@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FormField, inputCls, Spinner } from './UI'
 
 export default function ContactForm({ initial, onSave, onClose }) {
-  const blank = { first_name: '', last_name: '', email: '', job_title: '', company_name: '', phone: '', city: '', state: '', country: 'US', contact_type: 'Standard' }
+  const blank = { first_name: '', last_name: '', email: '', job_title: '', company_name: '', phone: '', city: '', state: '', country: 'US', contact_type: 'Standard', brand: 'Zephyr Retail' }
   const [form, setForm] = useState(initial ? {
     first_name: initial.first_name || '',
     last_name: initial.last_name || '',
@@ -14,6 +14,7 @@ export default function ContactForm({ initial, onSave, onClose }) {
     state: initial.state || '',
     country: initial.country || 'US',
     contact_type: initial.contact_type || 'Standard',
+    brand: initial.brand || 'Zephyr Retail',
   } : blank)
   const [saving, setSaving] = useState(false)
 
@@ -47,6 +48,12 @@ export default function ContactForm({ initial, onSave, onClose }) {
           </select>
         </FormField>
       </div>
+      <FormField label="Brand">
+        <select className={inputCls} value={form.brand} onChange={set('brand')}>
+          <option value="Zephyr Retail">Zephyr Retail</option>
+          <option value="Zephyr Luxe">Zephyr Luxe</option>
+        </select>
+      </FormField>
       <div className="grid grid-cols-3 gap-4">
         <FormField label="City"><input className={inputCls} value={form.city} onChange={set('city')} placeholder="New York" /></FormField>
         <FormField label="State"><input className={inputCls} value={form.state} onChange={set('state')} placeholder="NY" /></FormField>
