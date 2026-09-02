@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       first_name, last_name, email, job_title, company_name, phone,
       city, state, country, company_id, zi_contact_id, zi_person_id,
       source, enriched, linkedin_url, department, seniority, management_level,
-      contact_type,
+      contact_type, brand,
     } = req.body
 
     if (!first_name) {
@@ -165,6 +165,7 @@ export default async function handler(req, res) {
       ...(management_level && { seniority: management_level }),
       ...(seniority        && { seniority }),
       ...(contact_type     && { contact_type }),
+      ...(brand             && { brand }),
     }
 
     // ── 4. If duplicate found: merge new data in, return updated ─────────
